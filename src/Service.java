@@ -11,11 +11,11 @@ public class Service {
      * Получить число вхождений символов в пришедшей строке
      *
      * @param inputString - пришедшая строка
-     * @return - HashMap содержащая число вхождений каждого символа их прищедшей строки
+     * @return - HashMap содержащая число вхождений каждого символа из пришедшей строки
      */
-    static HashMap<Character, Integer> getNumberOfCharactersInAString (String inputString ) {
+    public static HashMap<Character, Integer> getNumberOfCharactersInAString(String inputString) {
         HashMap<Character, Integer> result = new HashMap<>();
-        char[] charArrayFromInputString = inputString.toLowerCase().replaceAll("\\s+","").toCharArray();
+        char[] charArrayFromInputString = inputString.toLowerCase().replaceAll("\\s+", "").toCharArray();
 
         for (char c : charArrayFromInputString) {
             result.merge(c, 1, Integer::sum);
@@ -28,13 +28,13 @@ public class Service {
      * Записать из пришедшего HashMap в файл по указанному имени
      *
      * @param hashMapToWrite - HashMap из которой будем записывать в файл
-     * @param fileName - имя файла куда будем записывать
+     * @param fileName       - имя файла куда будем записывать
      */
     public static void writeHashMapToFile(HashMap<Character, Integer> hashMapToWrite, String fileName) {
         try (Writer writer = new BufferedWriter(
                 new FileWriter(fileName)
         )) {
-            for (Map.Entry<Character, Integer> entry: hashMapToWrite.entrySet()) {
+            for (Map.Entry<Character, Integer> entry : hashMapToWrite.entrySet()) {
                 writer.write(entry.getKey() + " - " + entry.getValue() + "\n");
             }
         } catch (IOException e) {
